@@ -5,16 +5,16 @@ import discord.ext.commands
 signOffKey = random.randint(1,1000000)
 ownerId = # insert owner's discord id here
 last_messages = {}
-
+my_prefix = "$$"
 TOKEN = # insert token here
 
 client = discord.Client()
 
 @client.event
 async def on_message(message):
-    if (message.content.startswith("$$")):
-        # commands go here. the bot's prefix is $$
-        if (message.content.startswith("$$sayhello")):
+    if (message.content.startswith(my_prefix)):
+        # commands go here
+        if (message.content.startswith(my_prefix)):
             await message.channel.send("Hello World!")
 
 @client.event
