@@ -1,37 +1,25 @@
-import discord.ext.commands
-#from discord.ext.commands import Bot
-#from discord.ext.commands import MemberConverter
+import os
+import discord
+import botfiles.bot_data as bd
+import botfiles.myCommands as mc
 
-signOffKey = random.randint(1,1000000)
-ownerId = # insert owner's discord id here
-last_messages = {}
-my_prefix = "$$"
-TOKEN = # insert token here
-
-client = discord.Client()
+client = bd.client
+prefix = bd.prefix
 
 @client.event
 async def on_message(message):
-    if (message.content.startswith(my_prefix)):
-        # commands go here
-        if (message.content.startswith(my_prefix)):
-            await message.channel.send("Hello World!")
+  if message.content.startswith(prefix):
+    if " " in message.content:
+      command = mc.mapNameToFunc(message.content[2:message.content.find(" ")])
+    else:
+      command = mc.mapNameToFunc(message.content[2:])
+    try:
+      await command(message)
+    except:
+      await message.channel.send(message.author.mention + " This command doesn't exist, or you don't have access to it")
 
 @client.event
 async def on_ready():
-  #await client.change_presence(game=Game(name="with your feelings"))
-  print("Logged in as " + client.user.name)
-  print("Sign Off Key: " + str(signOffKey))
+  print("Ready. Signed in as " + client.user.name)
 
-
-async def list_servers():
-  await client.wait_until_ready()
-  while not client.is_closed:
-    print("Current servers:")
-    for server in client.servers:
-      print(server.name)
-    await asyncio.sleep(600)
-
-
-client.loop.create_task(list_servers())
-client.run(TOKEN)
+bd.client.run(os.environ["TOKEN"])
