@@ -8,7 +8,7 @@ prefix = bd.prefix
 
 @client.event
 async def on_message(message):
-  if client.user.mention in message.content.memtions:
+  if client.user.mention in message.content.mentions:
     await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
   if message.content.startswith(prefix):
     if " " in message.content:
