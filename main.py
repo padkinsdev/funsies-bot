@@ -22,4 +22,4 @@ async def on_message(message):
 async def on_ready():
   print("Ready. Signed in as " + client.user.name)
 
-bd.client.run(os.environ["TOKEN"])
+bd.client.run(os.environ['TOKEN'])
