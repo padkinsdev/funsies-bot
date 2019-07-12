@@ -8,7 +8,7 @@ prefix = bd.prefix
 
 @client.event
 async def on_message(message):
-  if message.author = client.user:
+  if message.author == client.user:
     pass
   if client.user.mentioned_in(message) and "@everyone" not in message.content:
     await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
