@@ -10,14 +10,14 @@ prefix = bd.prefix
 async def on_message(message):
   if message.author == client.user:
     pass
-  if client.user.mentioned_in(message) and "@everyone" not in message.content:
+  elif client.user.mentioned_in(message) and "@everyone" not in message.content:
     await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
-  if message.content == "y":
+  elif message.content == "y":
     mc.confirm(message.author.id)
     await message.channel.send("Confirmed!")
-  if message.content == "n":
+  elif message.content == "n":
     mc.deconfirm(message.author.id)
-  if message.content.startswith(prefix):
+  elif message.content.startswith(prefix):
     if " " in message.content:
       command = mc.mapNameToFunc(message.content[2:message.content.find(" ")])
     else:
