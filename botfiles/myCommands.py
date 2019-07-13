@@ -44,3 +44,4 @@ def mapNameToFunc(name):
 
 commandDict = {"hello": hello, "marry": marry}
 
+pending_marriages = {}
