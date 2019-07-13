@@ -1,6 +1,6 @@
 import asyncio
 import botfiles.bot_data as bot_data
-import required.random_quote as rq
+#import required.random_quote as rq
 client = bot_data.client
 gatekeeper = bot_data.gatekeeper
 
