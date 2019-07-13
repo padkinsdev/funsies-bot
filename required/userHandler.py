@@ -10,8 +10,10 @@ class UserDatabase:
       self.createDataBase()
   def createDataBase(self):
     connection, crsr = self.connectToDB()
-    init_command = "CREATE TABLE users (snowflake_id INTEGER PRIMARY KEY, permissions VARCHAR(5), name VARCHAR(20))"
-    crsr.execute(init_command)
+    init_one = "CREATE TABLE users (snowflake_id INTEGER PRIMARY KEY, permissions VARCHAR(5), name VARCHAR(20))"
+    crsr.execute(init_one)
+    init_two = "CREATE TABLE marriages (marriage_id INTEGER PRIMARY KEY, user_one INTEGER, user_two INTEGER)"
+    crsr.execute(init_two)
     connection.commit()
     connection.close()
   def connectToDB(self):
@@ -40,7 +42,18 @@ class UserDatabase:
     else:
       self.insertNewUser(str(userId), "1", str(username))
       return "1"
-  def userExists(self, userId):
+  #def userExists(self, userId):
+  #  connection, crsr = self.connectToDB()
+  #  crsr.execute("EXISTS " + str(userId))
+  #  return crsr.fetchone()
+  def new_marriage(self, user_one, user_two):
     connection, crsr = self.connectToDB()
-    crsr.execute("EXISTS " + str(userId))
-    return crsr.fetchone()
+    crsr.execute("SELECT COUNT(marriage_id) FROM marriages")
+    last_id = int(crsr.fetchone()[0])
+    crsr.execute("INSERT INTO marriages VALUES (" + str(last_id+1) + ", " + str(user_one) + ", " + str(user_two) + ")")
+    connection.commit()
+    connection.close()
+  def delete_marriage(self, user_one, user_two):
+    connection, crsr = self.connectToDB()
+    crsr.execute("DELETE FROM marriages WHERE user_one=" + str(user_one) + " AND user_two=" + str(user_two))
+
