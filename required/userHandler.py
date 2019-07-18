@@ -37,10 +37,11 @@ class UserMarkov:
     with open('markov_data.pkl', 'wb') as jar:
       pickle.dump(datacopy, jar)
   def unpickle_me(self):
-    with open('markov_data.pkl', 'rb') as pkl_file:
-      data = pickle.load(pkl_file)
-      self.probabilities = data[0]
-      self.word_dists = data[1]
+    if isfile('markov_data.pkl'):
+      with open('markov_data.pkl', 'rb') as pkl_file:
+        data = pickle.load(pkl_file)
+        self.probabilities = data[0]
+        self.word_dists = data[1]
   def gen_text(self, user_id):
     self.calc_distributions(user_id)
     final_text = ""
