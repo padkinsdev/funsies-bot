@@ -1,5 +1,64 @@
 import sqlite3
 from os.path import isfile
+import pickle
+from random import randint
+from random import choices
+
+class UserMarkov:
+  """
+  Updates itself using messages that a user sends, then is able to mimic the user's speech patterns
+  """
+  def __init__(self):
+    self.probabilities = {}
+    self.word_dists = {}
+  def add_new_user(self, user_id):
+    if user_id not in self.probabilities.keys():
+      self.probabilities.update({user_id: {}})
+      self.word_dists.update({user_id: {}})
+  def update(self, message):
+    readable = "<START> " + message.content + " <END>" 
+    words = readable.split(" ")
+    for i in range(1, len(words)-1):
+      if words[i] != " ":
+        if words[i] in self.probabilities[message.author.id].keys():
+          self.probabilities[message.author.id][words[i]][words[i+1]] += 1
+        else:
+          self.probabilities[message.author.id].update({words[i]:{words[i+1]:1}})
+  def calc_distributions(self, user_id):
+    self.word_dists[user_id] = None
+    for word in self.probabilities[user_id]:
+      times_used = 0
+      for next_word in self.probabilities[user_id][word]:
+        times_used += self.probabilities[user_id][word][next_word]
+      for next_word in self.probabilities[user_id][word]:
+        self.word_dists[user_id].update({word: {next_word: float(self.probabilities[user_id][word][next_word])/float(times_used)}})
+  def pickle_me(self):
+    datacopy = [self.probabilities.copy(), self.word_dists.copy()]
+    with open('markov_data.pkl', 'wb') as jar:
+      pickle.dump(datacopy, jar)
+  def unpickle_me(self):
+    with open('markov_data.pkl', 'rb') as pkl_file:
+      data = pickle.load(pkl_file)
+      self.probabilities = data[0]
+      self.word_dists = data[1]
+  def gen_text(self, user_id):
+    self.calc_distributions(user_id)
+    final_text = ""
+    text = ["<START>"]
+    cur_word = "<START>"
+    while cur_word != "<END>":
+      words = []
+      weighting = []
+      for word in self.word_dists[user_id][cur_word].keys():
+        words.append(word)
+        weighting.append(self.word_dists[user_id][cur_word][word])
+      new_word = choices(words, weights=weighting, cum_weights=1, k=1)
+      text.append(new_word)
+      cur_word = new_word
+    for word in text:
+      if word != "<START>" and word != "<END>":
+        final_text += word + " "
+    return final_text
 
 class UserDatabase:
   def __init__(self):
