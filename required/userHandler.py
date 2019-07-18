@@ -56,4 +56,14 @@ class UserDatabase:
   def delete_marriage(self, user_one, user_two):
     connection, crsr = self.connectToDB()
     crsr.execute("DELETE FROM marriages WHERE user_one=" + str(user_one) + " AND user_two=" + str(user_two))
+    connection.commit()
+    connection.close()
+  def get_marriages_for_user(self, user_id):
+    connection, crsr = self.connectToDB()
+    crsr.execute("SELECT user_one FROM marriages WHERE user_two = " + str(user_id))
+    results = crsr.fetchone()
+    crsr.execute("SELECT user_two FROM marriages WHERE user_one = " + str(user_id))
+    results += crsr.fetchone()
+    return results
+    
 
