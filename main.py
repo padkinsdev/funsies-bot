@@ -5,6 +5,7 @@ import botfiles.myCommands as mc
 
 client = bd.client
 prefix = bd.prefix
+pickle_count = 0
 
 @client.event
 async def on_message(message):
@@ -12,6 +13,11 @@ async def on_message(message):
     pass
   else:
     bd.gatekeeper.markovian.update(message)
+    if pickle_count >= 10:
+      bd.gatekeeper.markovian.pickle_me()
+      pickle_count = 0
+    else:
+      pickle_count += 1
   elif client.user.mentioned_in(message) and "@everyone" not in message.content:
     await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
   elif message.content == "y":
@@ -31,6 +37,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+  bd.gatekeeper.markovian.unpickle_me()
   print("Ready. Signed in as " + client.user.name)
 
 bd.client.run(os.environ['TOKEN'])
