@@ -10,6 +10,8 @@ prefix = bd.prefix
 async def on_message(message):
   if message.author == client.user:
     pass
+  else:
+    bd.gatekeeper.markovian.update(message)
   elif client.user.mentioned_in(message) and "@everyone" not in message.content:
     await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
   elif message.content == "y":
