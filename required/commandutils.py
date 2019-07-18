@@ -5,6 +5,7 @@ class Commandler:
   def __init__(self):
     self.userDB = userHandler.UserDatabase()
     self.perms = permissions.PermissionInteger()
+    self.markovian = userHandler.UserMarkov()
   def requiresPermission(self, permList):
     def decorator(func):
       def decorated(message):
