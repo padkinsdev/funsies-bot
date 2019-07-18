@@ -47,6 +47,13 @@ async def divorce(message):
   else:
     await message.channel.send("Info on command `<divorce>`: Use " + bot_data.prefix + "divorce <@user_to_divorce> to divorce from a user and suffer from intense feelings of guilt.")
 
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def imitate_me(message):
+  if message.author.id in gatekeeper.markovian.probabilities.keys():
+    await message.channel.send(gatekeeper.markovian.gen_text(message.author.id))
+  else:
+    await message.channel.send("Sorry " + message.author.mention + " I don't have enough data to imitate you")    
+
 def confirm(user_id):
   if user_id in pending_marriages.keys():
     pending_marriages[user_id][0] = "y"
@@ -63,6 +70,6 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce}
+commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me}
 
 pending_marriages = {}
