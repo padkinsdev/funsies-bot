@@ -1,6 +1,7 @@
 import asyncio
 import botfiles.bot_data as bot_data
-#import required.random_quote as rq
+import required.some_utils as su
+
 client = bot_data.client
 gatekeeper = bot_data.gatekeeper
 
@@ -25,6 +26,15 @@ async def marry(message):
       if pending_marriages[user.id][0] == "n": # technically unnecessary
         await message.channel.send(user.mention + " " + message.author.mention + " Marriage request timed out")
       pending_marriages.pop(user.id)
+      
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def check_marriages(message):
+  marriages = gatekeeper.userDB.get_marriages_for_user(str(message.author.id))
+  embed_format = ""
+  for item in marriages:
+    embed_format += str(item) + "\n"
+  embed = su.create_embed(title="Marriages", content=message.author.name + " has married:\n" + embed_format)
+  await message.channel.send(embed)
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
