@@ -134,11 +134,13 @@ class UserDatabase:
     results = crsr.fetchone()
     crsr.execute("SELECT user_two FROM marriages WHERE user_one = " + str(user_id))
     final_results = []
-    for item in results:
-      final_results.append(item)
+    if results:
+      for item in results:
+        final_results.append(item)
     results = crsr.fetchone()
-    for item in results:
-      final_results.append(item)
+    if results:
+      for item in results:
+        final_results.append(item)
     return final_results
     
 
