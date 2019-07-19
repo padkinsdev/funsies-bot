@@ -34,8 +34,8 @@ async def check_marriages(message):
     embed_format = ""
     for item in marriages:
       embed_format += str(item) + "\n"
-    embed = su.create_embed(title="Marriages", content=message.author.name + " has married:\n" + embed_format)
-    await message.channel.send(embed)
+    #embed = su.create_embed(title="Marriages", content=message.author.name + " has married:\n" + embed_format)
+    await message.channel.send(message.author.mention + " has married:\n" + embed_format)
   else:
     await message.channel.send("You, my friend, are single as a Pringle")
 
