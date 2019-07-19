@@ -11,6 +11,7 @@ class UserMarkov:
   def __init__(self):
     self.probabilities = {}
     self.word_dists = {}
+    self.pickle_count = 0
   def add_new_user(self, user_id):
     if user_id not in self.probabilities.keys():
       self.probabilities.update({user_id: {}})
@@ -24,6 +25,11 @@ class UserMarkov:
           self.probabilities[message.author.id][words[i]][words[i+1]] += 1
         else:
           self.probabilities[message.author.id].update({words[i]:{words[i+1]:1}})
+    if self.pickle_count >= 10:
+      self.pickle_me()
+      self.pickle_count = 0
+    else:
+      self.pickle_count += 1
   def calc_distributions(self, user_id):
     self.word_dists[user_id] = None
     for word in self.probabilities[user_id]:
