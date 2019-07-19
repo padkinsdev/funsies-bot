@@ -58,6 +58,7 @@ def confirm(user_id):
   if user_id in pending_marriages.keys():
     pending_marriages[user_id][0] = "y"
     gatekeeper.userDB.new_marriage(user_id, pending_marriages[user_id][1])
+    pending_marriages.pop(user_id)
 
 def deconfirm(user_id):
   if user_id in pending_marriages.keys():
