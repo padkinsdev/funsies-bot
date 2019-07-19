@@ -18,22 +18,22 @@ async def on_message(message):
       pickle_count = 0
     else:
       pickle_count += 1
-  elif client.user.mentioned_in(message) and "@everyone" not in message.content:
-    await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
-  elif message.content == "y":
-    mc.confirm(message.author.id)
-    await message.channel.send("Confirmed!")
-  elif message.content == "n":
-    mc.deconfirm(message.author.id)
-  elif message.content.startswith(prefix):
-    if " " in message.content:
-      command = mc.mapNameToFunc(message.content[2:message.content.find(" ")])
-    else:
-      command = mc.mapNameToFunc(message.content[2:])
-    try:
-      await command(message)
-    except:
-      await message.channel.send(message.author.mention + " This command doesn't exist, or you don't have access to it")
+    if client.user.mentioned_in(message) and "@everyone" not in message.content:
+      await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
+    elif message.content == "y":
+      mc.confirm(message.author.id)
+      await message.channel.send("Confirmed!")
+    elif message.content == "n":
+      mc.deconfirm(message.author.id)
+    elif message.content.startswith(prefix):
+      if " " in message.content:
+        command = mc.mapNameToFunc(message.content[2:message.content.find(" ")])
+      else:
+        command = mc.mapNameToFunc(message.content[2:])
+      try:
+        await command(message)
+      except:
+        await message.channel.send(message.author.mention + " This command doesn't exist, or you don't have access to it")
 
 @client.event
 async def on_ready():
