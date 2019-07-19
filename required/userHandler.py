@@ -22,7 +22,7 @@ class UserMarkov:
     for i in range(1, len(words)-1):
       if words[i] != " ":
         if words[i] in self.probabilities[message.author.id].keys():
-          if words[i+1] in self.probabilities[message.author.id][words[i].keys():
+          if words[i+1] in self.probabilities[message.author.id][words[i]].keys():
             self.probabilities[message.author.id][words[i]][words[i+1]] += 1
           else:
             self.probabilities[message.author.id][words[i]].update({words[i+1]:1})
