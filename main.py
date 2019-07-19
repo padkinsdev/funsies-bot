@@ -16,10 +16,10 @@ async def on_message(message):
     bd.gatekeeper.markovian.update(message)
     if client.user.mentioned_in(message) and "@everyone" not in message.content:
       await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
-    elif message.content == "y":
+    elif message.content.lower() == "y":
       mc.confirm(message.author.id)
       await message.channel.send("Confirmed!")
-    elif message.content == "n":
+    elif message.content.lower() == "n":
       mc.deconfirm(message.author.id)
     elif message.content.startswith(prefix):
       if " " in message.content:
