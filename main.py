@@ -12,6 +12,8 @@ async def on_message(message):
   if message.author == client.user:
     pass
   else:
+    if message.author.id not in bd.gatekeeper.markovian.probabilities:
+      bd.gatekeeper.markovian.add_new_user(message.author.id)
     bd.gatekeeper.markovian.update(message)
     if pickle_count >= 10:
       bd.gatekeeper.markovian.pickle_me()
