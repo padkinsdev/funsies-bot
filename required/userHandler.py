@@ -18,8 +18,6 @@ class UserMarkov:
   def update(self, message):
     readable = "<START> " + message.content + " <END>" 
     words = readable.split(" ")
-    if message.author.id not in self.probabilities.keys():
-      self.probabilities.update({message.author.id: {}})
     for i in range(1, len(words)-1):
       if words[i] != " ":
         if words[i] in self.probabilities[message.author.id].keys():
