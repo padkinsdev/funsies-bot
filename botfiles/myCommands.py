@@ -55,7 +55,7 @@ async def imitate_me(message):
     await message.channel.send("Sorry " + message.author.mention + " I don't have enough data to imitate you")
 
 @gatekeeper.serverSpecific([servers["5htp"]])
-async def help(message):
+async def commands(message):
   cmd_list = "My Commands:\n"
   for cmd in commandDict.keys():
     cmd_list = cmd_list + cmd + "\n"
@@ -78,7 +78,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me}
+commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me, "help": commands}
 
 pending_marriages = {}
 
