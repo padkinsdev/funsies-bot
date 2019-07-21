@@ -52,7 +52,14 @@ async def imitate_me(message):
   if message.author.id in gatekeeper.markovian.probabilities.keys():
     await message.channel.send(gatekeeper.markovian.gen_text(message.author.id))
   else:
-    await message.channel.send("Sorry " + message.author.mention + " I don't have enough data to imitate you")    
+    await message.channel.send("Sorry " + message.author.mention + " I don't have enough data to imitate you")
+
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def help(message):
+  cmd_list = "My Commands:\n"
+  for cmd in commandDict.keys():
+    cmd_list = cmd_list + cmd + "\n"
+  await message.channel.send(cmd_list)
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
@@ -74,3 +81,5 @@ def mapNameToFunc(name):
 commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me}
 
 pending_marriages = {}
+
+help_info = {}
