@@ -1,6 +1,7 @@
 import asyncio
 import botfiles.bot_data as bot_data
 import required.some_utils as su
+import random
 
 client = bot_data.client
 gatekeeper = bot_data.gatekeeper
@@ -61,6 +62,14 @@ async def commands(message):
     cmd_list = cmd_list + cmd + "\n"
   await message.channel.send(cmd_list)
 
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def rnum(message):
+  params = message.content.split(" ")
+  try:
+    await message.channel.send(str(random.randint(int(params[1]), int(params[2])))
+  except:
+    await message.channel.send("Something went wrong???")
+
 def confirm(user_id):
   if user_id in pending_marriages.keys():
     pending_marriages[user_id][0] = "y"
@@ -78,7 +87,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me, "help": commands}
+commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me, "help": commands, "rnum": rnum, "r_num": rnum}
 
 pending_marriages = {}
 
