@@ -66,7 +66,7 @@ async def commands(message):
 async def rnum(message):
   params = message.content.split(" ")
   try:
-    await message.channel.send(str(random.randint(int(params[1]), int(params[2])))
+    await message.channel.send(str(random.randint(int(params[1]), int(params[2]))))
   except:
     await message.channel.send("Something went wrong???")
 
