@@ -70,6 +70,10 @@ async def rnum(message):
   except:
     await message.channel.send("Something went wrong???")
 
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def xkcd(message):
+  await message.channel.send("https://xkcd.com/{}/".format(str(random.randint(1, 2181))))
+
 def confirm(user_id):
   if user_id in pending_marriages.keys():
     pending_marriages[user_id][0] = "y"
@@ -87,7 +91,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me, "help": commands, "rnum": rnum, "r_num": rnum}
+commandDict = {"hello": hello, "marry": marry, "check_marriages": check_marriages, "divorce": divorce, "imitate_me": imitate_me, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd}
 
 pending_marriages = {}
 
