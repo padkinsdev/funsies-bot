@@ -1,11 +1,14 @@
 import required.userHandler as userHandler
 import required.permissions as permissions
+import required.aws_bucket as aws_bucket
+import botfiles.bot_data as bot_data
 
 class Commandler:
   def __init__(self):
     self.userDB = userHandler.UserDatabase()
     self.perms = permissions.PermissionInteger()
     self.markovian = userHandler.UserMarkov()
+    self.bucket_handler = aws_bucket.AWSBucketManager(bot_data.bucket_name)
   def requiresPermission(self, permList):
     def decorator(func):
       def decorated(message):
