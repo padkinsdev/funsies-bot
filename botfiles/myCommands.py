@@ -82,7 +82,7 @@ async def test_bucket(message):
       text = test.read()
       await message.channel.send(text)
   else:
-    await message.channel.send(str(err))
+    await message.channel.send(str(error))
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
