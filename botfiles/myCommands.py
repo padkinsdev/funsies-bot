@@ -80,6 +80,8 @@ async def test_bucket(message):
     with open("test.txt", "r") as test:
       text = test.read()
       await message.channel.send(text)
+  else:
+    await message.channel.send("Command doesn't work")
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
@@ -98,7 +100,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket}
 
 pending_marriages = {}
 
