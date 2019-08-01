@@ -10,11 +10,11 @@ class AWSBucketManager:
       with open(fname, "wb") as item:
         self.bucket.download_fileobj(fname, item)
       return True
-    except:
-      return False
+    except Exception as err:
+      return False, err
   def upload_file(self, fpath, fname):
     try:
       with open(fpath, "rb") as item:
         self.bucket.upload_fileobj(item, fname)
-    except:
-      return False
+    except Exception as err:
+      return False, err
