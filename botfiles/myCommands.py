@@ -76,7 +76,7 @@ async def xkcd(message):
   
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def test_bucket(message):
-  success, error = gatekeeper.bucket_handler.get_as_file("test.txt"):
+  success, error = gatekeeper.bucket_handler.get_as_file("test.txt")
   if success:
     with open("test.txt", "r") as test:
       text = test.read()
