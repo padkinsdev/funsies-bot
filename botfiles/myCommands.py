@@ -73,6 +73,13 @@ async def rnum(message):
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def xkcd(message):
   await message.channel.send("https://xkcd.com/{}/".format(str(random.randint(1, 2181))))
+  
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def test_bucket(message):
+  if gatekeeper.bucket_handler.get_as_file("test.txt"):
+    with open("test.txt", "r") as test:
+      text = test.read()
+      await message.channel.send(text)
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
