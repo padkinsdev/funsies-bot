@@ -76,12 +76,13 @@ async def xkcd(message):
   
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def test_bucket(message):
-  if gatekeeper.bucket_handler.get_as_file("test.txt"):
+  success, error = gatekeeper.bucket_handler.get_as_file("test.txt"):
+  if success:
     with open("test.txt", "r") as test:
       text = test.read()
       await message.channel.send(text)
   else:
-    await message.channel.send("Command doesn't work")
+    await message.channel.send(str(err))
 
 def confirm(user_id):
   if user_id in pending_marriages.keys():
