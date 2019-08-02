@@ -48,6 +48,12 @@ async def backup(message):
     await message.channel.send("Data was successfully backed up")
   else:
     await message.channel.send(str(error))
+    
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def daily(message):
+  increase_amount = str(random.randint(50, 100))
+  gatekeeper.userDB.add_to_bal(message.author.id, increase_amount)
+  await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
@@ -56,7 +62,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "daily": daily}
 
 pending_marriages = {}
 
