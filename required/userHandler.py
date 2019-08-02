@@ -41,5 +41,14 @@ class UserDatabase:
     else:
       self.insertNewUser(str(userId), "1")
       return "1"
+  def retrieveUserBal(self, userId):
+    connection, crsr = self.connectToDB()
+    crsr.execute("SELECT balance FROM users WHERE snowflake_id = " + str(userId))
+    result = crsr.fetchone()
+    if result:
+      return result[0]
+    else:
+      self.insertNewUser(str(userId), "1")
+      return "1"
     
 
