@@ -78,7 +78,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "daily": daily, "backup": backup, "reset_db": new_db}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "daily": daily, "backup": backup, "reset_db": new_db, "affirm": affirm}
 
 pending_marriages = {}
 
