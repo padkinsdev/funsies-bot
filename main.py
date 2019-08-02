@@ -30,6 +30,7 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
+  os.remove("userDB.db")
   success, error = bd.gatekeeper.bucket_handler.get_as_file("userDB.db")
   print("Ready. Signed in as " + client.user.name)
 
