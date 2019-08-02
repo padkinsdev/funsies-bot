@@ -8,7 +8,6 @@ class Commandler:
   def __init__(self):
     self.userDB = userHandler.UserDatabase()
     self.perms = permissions.PermissionInteger()
-    self.markovian = userHandler.UserMarkov()
     self.bucket_handler = aws_bucket.AWSBucketManager(os.environ["AWS_BUCKET_NAME"])
   def requiresPermission(self, permList):
     def decorator(func):
