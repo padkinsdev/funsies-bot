@@ -11,9 +11,6 @@ async def on_message(message):
   if message.author == client.user:
     pass
   else:
-    if message.author.id not in bd.gatekeeper.markovian.probabilities:
-      bd.gatekeeper.markovian.add_new_user(message.author.id)
-    bd.gatekeeper.markovian.update(message)
     if client.user.mentioned_in(message) and "@everyone" not in message.content:
       await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
     elif message.content.lower() == "y":
@@ -33,7 +30,6 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-  bd.gatekeeper.markovian.unpickle_me()
   print("Ready. Signed in as " + client.user.name)
 
 bd.client.run(os.environ['TOKEN'])
