@@ -65,7 +65,11 @@ async def new_db(message):
     await message.channel.send("Data was successfully reset")
   else:
     await message.channel.send(str(error))
-    
+
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def affirm(message):
+  await message.delete()
+  await message.channel.send("That's valid, and I hope you feel better soon")
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
