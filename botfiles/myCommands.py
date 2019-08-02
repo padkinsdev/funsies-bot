@@ -41,16 +41,6 @@ async def test_bucket(message):
   else:
     await message.channel.send(str(error))
 
-def confirm(user_id):
-  if user_id in pending_marriages.keys():
-    pending_marriages[user_id][0] = "y"
-    gatekeeper.userDB.new_marriage(user_id, pending_marriages[user_id][1])
-    pending_marriages.pop(user_id)
-
-def deconfirm(user_id):
-  if user_id in pending_marriages.keys():
-    pending_marriages.pop(user_id)
-
 def mapNameToFunc(name):
   if name in commandDict.keys():
     return commandDict[name]
