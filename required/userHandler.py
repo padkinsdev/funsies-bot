@@ -48,7 +48,9 @@ class UserDatabase:
     if result:
       return result[0]
     else:
-      self.insertNewUser(str(userId), "1")
-      return "1"
-    
-
+      self.insertNewUser(str(userId), "0")
+      return "0"
+  def add_to_bal(self, user_id, amount):
+    balance = int(self.retrieveUserBal(user_id))
+    balance += amount
+    self.modifyEntry(user_id, newBal=balance)
