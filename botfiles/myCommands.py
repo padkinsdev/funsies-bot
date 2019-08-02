@@ -40,6 +40,14 @@ async def test_bucket(message):
       await message.channel.send(text)
   else:
     await message.channel.send(str(error))
+    
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def backup(message):
+  success, error = gatekeeper.bucket_handler.upload_file("userDB.db", "userDB.db")
+  if success:
+    await message.channel.send("Data was successfully backed up")
+  else:
+    await message.channel.send(str(error))
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
