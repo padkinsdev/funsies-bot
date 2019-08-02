@@ -1,4 +1,5 @@
 import asyncio
+import os
 import botfiles.bot_data as bot_data
 import required.some_utils as su
 import random
@@ -55,6 +56,17 @@ async def daily(message):
   gatekeeper.userDB.add_to_bal(message.author.id, increase_amount)
   await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
 
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def new_db(message):
+  with open("userDB.db", 'w') as database:
+    pass
+  success, error = gatekeeper.bucket_handler.upload_file("userDB.db", "userDB.db")
+  if success:
+    await message.channel.send("Data was successfully reset")
+  else:
+    await message.channel.send(str(error))
+    
+
 def mapNameToFunc(name):
   if name in commandDict.keys():
     return commandDict[name]
@@ -62,7 +74,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "daily": daily, "backup": backup}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "daily": daily, "backup": backup, "reset_db": new_db}
 
 pending_marriages = {}
 
