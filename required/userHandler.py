@@ -20,3 +20,7 @@ class UserDatabase:
       return True
     else:
       return False
+  def package_as_fobj(self, db_name="userDB.json"):
+    with open(db_name, 'w') as datafile:
+      json.dump(self.data, datafile)
+      return datafile
