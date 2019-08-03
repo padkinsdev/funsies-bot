@@ -1,13 +1,12 @@
 import asyncio
 import os
 import botfiles.bot_data as bot_data
-import required.some_utils as su
 import random
 
 client = bot_data.client
 gatekeeper = bot_data.gatekeeper
 
-servers = {"5htp":509550635146805269}
+servers = bot_data.servers
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def hello(message):
