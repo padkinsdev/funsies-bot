@@ -10,3 +10,5 @@ prefix = "f."
 default_embed_color = "#f57542"
 
 bucket_name = os.environ["AWS_BUCKET_NAME"]
+
+servers = {"5htp":509550635146805269}
