@@ -34,3 +34,9 @@ class Commandler:
           return None
       return decorated
     return decorator
+  def get_db(self, db_name="userDB.json"):
+    db_fobj = self.bucket_handler.get_as_file(db_name)
+    self.userDB.parse_to_dict(db_fobj)
+  def upload_db(self, db_name="userDB.json"):
+    db_fobj = self.userDB.package_as_fobj(db_name=db_name)
+    self.bucket_handler.upload_file(db_fobj, db_name)
