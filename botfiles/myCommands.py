@@ -30,16 +30,6 @@ async def rnum(message):
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def xkcd(message):
   await message.channel.send("https://xkcd.com/{}/".format(str(random.randint(1, 2181))))
-  
-@gatekeeper.serverSpecific([servers["5htp"]])
-async def test_bucket(message):
-  success, error = gatekeeper.bucket_handler.get_as_file("test.txt")
-  if success:
-    with open("test.txt", "r") as test:
-      text = test.read()
-      await message.channel.send(text)
-  else:
-    await message.channel.send(str(error))
     
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def backup(message):
@@ -63,7 +53,7 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "test_bucket": test_bucket, "backup": backup, "reset_db": new_db, "affirm": affirm}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup "affirm": affirm}
 
 pending_marriages = {}
 
