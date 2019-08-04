@@ -9,18 +9,27 @@ class UserDatabase:
     """
     self.data = json.load(fobj)
     fobj.close()
-  def get_field(self, field_name):
-    if field_name in self.data.keys():
-      return self.data[field_name]
+  def get_field(self, user_id, field_name):
+    if user_id in self.data.keys():
+      if field_name in self.data[user_id].keys():
+        return self.data[user_id][field_name]
+      else:
+        return None
     else:
+      self.add_new_user(user_id)
       return None
-  def write_field(self, field_name, value):
-    if field_name in self.data.keys():
-      self.data[field_name] = value
-      return True
+  def write_field(self, user_id, field_name, value):
+    if user_id in self.data.keys():
+      if field_name in self.data[user_id].keys():
+        self.data[user_id][field_name] = value
+        return True
+      else:
+        self.data[user_id].update({field_name: value})
     else:
-      return False
+      self.data.update({user_id: {field_name: value}})
+    return False
   def package_as_fobj(self, db_name="userDB.json"):
     with open(db_name, 'w') as datafile:
-      json.dump(self.data, datafile)
       return datafile
+  def add_new_user(self, user_id, field_dict={}):
+    self.data.update({user_id: field_dict})
