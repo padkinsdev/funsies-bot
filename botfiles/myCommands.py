@@ -43,27 +43,13 @@ async def test_bucket(message):
     
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def backup(message):
-  success, error = gatekeeper.bucket_handler.upload_file("userDB.db", "userDB.db")
-  if success:
-    await message.channel.send("Data was successfully backed up")
-  else:
-    await message.channel.send(str(error))
+  gatekeeper.upload_db()
     
 #@gatekeeper.serverSpecific([servers["5htp"]])
 #async def daily(message):
 #  increase_amount = str(random.randint(50, 100))
 #  gatekeeper.userDB.add_to_bal(message.author.id, increase_amount)
 #  await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
-
-@gatekeeper.serverSpecific([servers["5htp"]])
-async def new_db(message):
-  with open("userDB.db", 'w') as database:
-    pass
-  success, error = gatekeeper.bucket_handler.upload_file("userDB.db", "userDB.db")
-  if success:
-    await message.channel.send("Data was successfully reset")
-  else:
-    await message.channel.send(str(error))
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def affirm(message):
