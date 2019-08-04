@@ -32,4 +32,5 @@ class UserDatabase:
     with open(db_name, 'w') as datafile:
       return datafile
   def add_new_user(self, user_id, field_dict={}):
-    self.data.update({user_id: field_dict})
+    if user_id not in self.data.keys():
+      self.data.update({user_id: field_dict})
