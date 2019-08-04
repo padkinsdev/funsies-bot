@@ -13,11 +13,6 @@ async def on_message(message):
   else:
     if client.user.mentioned_in(message) and "@everyone" not in message.content:
       await message.channel.send("My prefix is " + prefix + " " + message.author.mention)
-    elif message.content.lower() == "y":
-      mc.confirm(message.author.id)
-      await message.channel.send("Confirmed!")
-    elif message.content.lower() == "n":
-      mc.deconfirm(message.author.id)
     elif message.content.startswith(prefix):
       if " " in message.content:
         command = mc.mapNameToFunc(message.content[2:message.content.find(" ")])
@@ -31,7 +26,7 @@ async def on_message(message):
 @client.event
 async def on_ready():
   os.remove("userDB.db")
-  success, error = bd.gatekeeper.bucket_handler.get_as_file("userDB.db")
+  bd.gatekeeper.get_db()
   print("Ready. Signed in as " + client.user.name)
 
 bd.client.run(os.environ['TOKEN'])
