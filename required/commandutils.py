@@ -12,13 +12,16 @@ class Commandler:
   def requiresPermission(self, permList):
     def decorator(func):
       def decorated(message):
-        userPerms = int(self.userDB.get_field("permissions"))
-        truePerms = self.perms.getPermInteger(permList)
-        if (userPerms & truePerms) == truePerms:
-          return func(message)
+        userPerms = self.userDB.get_field("permissions")
+        if userPerms:
+          truePerms = self.perms.getPermInteger(permList)
+          if (userPerms & truePerms) == truePerms:
+            return func(message)
+          else:
+            print("Failed permissions check")
         else:
-          print("Failed permissions check")
-          return None
+          print("User perm field doesn't exist")
+        return None
       return decorated
     return decorator
   def serverSpecific(self, enabledServers):
