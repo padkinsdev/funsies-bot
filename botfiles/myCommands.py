@@ -1,4 +1,5 @@
 import asyncio
+import discord
 import os
 import botfiles.bot_data as bot_data
 import random
@@ -45,6 +46,11 @@ async def backup(message):
 async def affirm(message):
   await message.delete()
   await message.channel.send("That's valid, and I hope you feel better soon")
+  
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def stats(message):
+  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nMessages sent:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "activity"))))
+  message.channel.send(embed)
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
@@ -53,4 +59,4 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats", stats}
