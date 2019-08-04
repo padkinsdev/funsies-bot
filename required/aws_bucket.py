@@ -11,7 +11,7 @@ class AWSBucketManager:
         self.bucket.download_fileobj(fname, item)
         return True, item
     except Exception as err:
-      return None, err
+      return False, err
   def upload_file(self, fobj, fname):
     try:
       self.bucket.upload_fileobj(fobj, fname)
