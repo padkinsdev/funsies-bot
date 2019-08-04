@@ -12,10 +12,7 @@ class Commandler:
   def requiresPermission(self, permList):
     def decorator(func):
       def decorated(message):
-        userPerms = int(self.userDB.retrieveUserPerms(message.author.id, message.author.name))
-        #if userPerms < 0:
-        #  self.userDB.insertNewUser(message.author.id, 1, str(message.author.name))
-        #  userPerms = 1
+        userPerms = int(self.userDB.get_field("permissions"))
         truePerms = self.perms.getPermInteger(permList)
         if (userPerms & truePerms) == truePerms:
           return func(message)
