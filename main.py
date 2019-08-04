@@ -25,7 +25,6 @@ async def on_message(message):
 
 @client.event
 async def on_ready():
-  os.remove("userDB.db")
   bd.gatekeeper.get_db()
   print("Ready. Signed in as " + client.user.name)
 
