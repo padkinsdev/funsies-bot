@@ -7,7 +7,7 @@ gatekeeper = cu.Commandler()
 
 prefix = "f."
 
-default_embed_color = "#f57542"
+default_embed_color = 0xf57542
 
 bucket_name = os.environ["AWS_BUCKET_NAME"]
 
