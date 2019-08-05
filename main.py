@@ -1,4 +1,5 @@
-import os
+import os, signal
+import sys
 import discord
 import botfiles.bot_data as bd
 import botfiles.myCommands as mc
@@ -6,6 +7,13 @@ import botfiles.preprocess as pp
 
 client = bd.client
 prefix = bd.prefix
+
+def shutdown(signum, stack):
+  client.logout()
+  bd.gatekeeper.upload_db()
+  sys.exit()
+
+signal.signal(signal.SIGTERM, shutdown)
 
 @client.event
 async def on_message(message):
