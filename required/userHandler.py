@@ -29,7 +29,7 @@ class UserDatabase:
       self.data.update({user_id: {field_name: value}})
     return False
   def package_as_fobj(self, db_name="userDB.json"):
-    with open(db_name, 'w') as datafile:
+    with open(db_name, 'wb') as datafile:
       return datafile
   def add_new_user(self, user_id, field_dict={}):
     if user_id not in self.data.keys():
