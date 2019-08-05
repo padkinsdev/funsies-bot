@@ -30,8 +30,8 @@ class UserDatabase:
     return False
   def package_as_fobj(self, db_name="userDB.json"):
     json.dump(self.data, db_name)
-    with open(db_name, 'rb') as datafile:
-      return datafile
+    datafile = open(db_name, 'rb')
+    return datafile
   def add_new_user(self, user_id, field_dict={}):
     if user_id not in self.data.keys():
       self.data.update({user_id: field_dict})
