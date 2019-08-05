@@ -10,7 +10,11 @@ prefix = bd.prefix
 
 def shutdown(signum, stack):
   client.logout()
-  bd.gatekeeper.upload_db()
+  success, err = bd.gatekeeper.upload_db()
+  if success:
+    print("Successfully backed up database")
+  else:
+    print(str(err))
   sys.exit()
 
 signal.signal(signal.SIGTERM, shutdown)
