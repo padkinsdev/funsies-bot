@@ -42,5 +42,6 @@ class Commandler:
       print("Could not fetch database")
   def upload_db(self, db_name="userDB.json"):
     db_fobj = self.userDB.package_as_fobj(db_name=db_name)
+    db_fobj.close()
     success, err = self.bucket_handler.upload_file(db_fobj, db_name)
     return success, err
