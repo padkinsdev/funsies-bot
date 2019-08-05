@@ -29,7 +29,8 @@ class UserDatabase:
       self.data.update({user_id: {field_name: value}})
     return False
   def package_as_fobj(self, db_name="userDB.json"):
-    json.dump(self.data, db_name)
+    with open(db_name, 'w') as dfile:
+      json.dump(self.data, dfile)
     datafile = open(db_name, 'rb')
     return datafile
   def add_new_user(self, user_id, field_dict={}):
