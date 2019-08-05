@@ -34,7 +34,11 @@ async def xkcd(message):
     
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def backup(message):
-  gatekeeper.upload_db()
+  success, err = gatekeeper.upload_db()
+  if not success:
+    await message.channel.send(err)
+  else:
+    await message.channel.send("Success!")
     
 #@gatekeeper.serverSpecific([servers["5htp"]])
 #async def daily(message):
