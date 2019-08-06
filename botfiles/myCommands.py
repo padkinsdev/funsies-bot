@@ -53,7 +53,7 @@ async def affirm(message):
   
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def stats(message):
-  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nMessages sent:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "activity"))))
+  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nMessages sent:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "level"))))
   await message.channel.send(embed=embed)
 
 def mapNameToFunc(name):
