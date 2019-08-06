@@ -17,7 +17,7 @@ async def check_level_up(message):
     await message.channel.send(message.author.mention + " Congrats! You are now level {}".format(curLevel))
 
 ### Bullet list of things the bot needs to do before checking the command list
-def preprocess_list(message):
+async def preprocess_list(message):
   update_activity(message)
   await check_level_up(message)
 
