@@ -12,7 +12,7 @@ class UserDatabase:
     print(self.data)
   def get_field(self, user_id, field_name):
     if str(user_id) in self.data.keys():
-      if str(field_name) in self.data[user_id].keys():
+      if str(field_name) in self.data[str(user_id)].keys():
         return self.data[str(user_id)][str(field_name)]
       else:
         return None
