@@ -11,8 +11,8 @@ def preprocess_list(message):
 
 
 def uptick(user_id, field_name):
-  curVal = int(gatekeeper.userDB.get_field(user_id, field_name))
+  curVal = gatekeeper.userDB.get_field(user_id, field_name)
   if curVal:
-    gatekeeper.userDB.write_field(user_id, field_name, curVal+1)
+    gatekeeper.userDB.write_field(user_id, field_name, int(curVal)+1)
   else:
     gatekeeper.userDB.write_field(user_id, field_name, 1)
