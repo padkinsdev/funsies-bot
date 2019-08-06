@@ -21,7 +21,7 @@ class UserDatabase:
       return None
   def write_field(self, user_id, field_name, value):
     if str(user_id) in self.data.keys():
-      if str(field_name) in self.data[user_id].keys():
+      if str(field_name) in self.data[str(user_id)].keys():
         self.data[str(user_id)][str(field_name)] = str(value)
         return True
       else:
