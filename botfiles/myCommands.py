@@ -1,6 +1,6 @@
 import asyncio
 import discord
-import os
+import os, datetime
 import botfiles.bot_data as bot_data
 import random
 
@@ -53,7 +53,8 @@ async def affirm(message):
   
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def stats(message):
-  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nMessages sent:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "level"))))
+  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nLevel:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "level"))), timestamp=datetime.now())
+  embed.set_thumbnail(bot_data.embed_thumburl)
   await message.channel.send(embed=embed)
 
 def mapNameToFunc(name):
