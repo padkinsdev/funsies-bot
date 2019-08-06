@@ -36,10 +36,10 @@ async def store_db():
   while True:
     await asyncio.sleep(600)
     success, err = bd.gatekeeper.upload_db()
-    if success:
-      print("Autostored db")
-    else:
-      print(str(err))
+    #if success:
+    #  print("Autostored db")
+    #else:
+    #  print(str(err))
 
 bd.client.loop.create_task(store_db())
 bd.client.run(os.environ['TOKEN'])
