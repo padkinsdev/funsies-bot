@@ -7,8 +7,7 @@ class AWSBucketManager:
     self.bucket = self.s3.Bucket(bucket_name)
   def get_as_file(self, fname):
     try:
-      with open("/tmp/"+fname, "wb") as item:
-        self.bucket.download_fileobj(fname, item)
+      self.bucket.download_file(fname, "/tmp/"+fname)
       item = open("/tmp/"+fname, 'r')
       return True, item
     except Exception as err:
