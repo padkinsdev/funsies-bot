@@ -14,3 +14,5 @@ bucket_name = os.environ["AWS_BUCKET_NAME"]
 servers = {"5htp":509550635146805269}
 
 embed_thumburl = "https://i.imgur.com/o4Hqucc.gif"
+
+level_up_factor = 1.15
