@@ -9,7 +9,7 @@ class UserDatabase:
     """
     self.data = json.load(fobj)
     fobj.close()
-    print(self.data)
+    #print(self.data)
   def get_field(self, user_id, field_name):
     if str(user_id) in self.data.keys():
       if str(field_name) in self.data[str(user_id)].keys():
