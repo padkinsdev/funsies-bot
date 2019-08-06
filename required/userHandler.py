@@ -25,7 +25,7 @@ class UserDatabase:
         self.data[str(user_id)][str(field_name)] = str(value)
         return True
       else:
-        self.data[user_id].update({str(field_name): str(value)})
+        self.data[str(user_id)].update({str(field_name): str(value)})
     else:
       self.data.update({str(user_id): {str(field_name): str(value)}})
     return False
