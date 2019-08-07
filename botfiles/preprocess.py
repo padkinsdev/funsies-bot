@@ -11,7 +11,7 @@ async def check_level_up(message):
   curLevel = gatekeeper.userDB.get_field(message.author.id, "level")
   if not curLevel:
     gatekeeper.userDB.write_field(message.author.id, "level", 1)
-  elif gatekeeper.userDB.get_field(message.author.id, "activity") == 100*math.pow((int(curLevel)+1), bd.level_up_factor):
+  elif gatekeeper.userDB.get_field(message.author.id, "activity") >= 100*math.pow((int(curLevel)+1), bd.level_up_factor):
     # Did the message sender level up?
     uptick(message.author.id, "level")
     await message.channel.send(message.author.mention + " Congrats! You are now level {}".format(curLevel))
