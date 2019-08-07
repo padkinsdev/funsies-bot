@@ -14,7 +14,7 @@ async def check_level_up(message):
   elif int(gatekeeper.userDB.get_field(message.author.id, "activity")) >= 100*math.pow((int(curLevel)+1), bd.level_up_factor):
     # Did the message sender level up?
     uptick(message.author.id, "level")
-    await message.channel.send(message.author.mention + " Congrats! You are now level {}".format(curLevel))
+    await message.channel.send(message.author.mention + " Congrats! You are now level {}".format(int(curLevel)+1))
 
 ### Bullet list of things the bot needs to do before checking the command list
 async def preprocess_list(message):
