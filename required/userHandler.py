@@ -29,6 +29,16 @@ class UserDatabase:
     else:
       self.data.update({str(user_id): {str(field_name): str(value)}})
     return False
+  def add_to_field(self, user_id, field_name, add_amount):
+    try:
+      cur_val = int(self.get_field(user_id, field_name))
+      if cur_val:
+        end_val = cur_val + int(add_amount)
+      else:
+        end_val = int(add_amount)
+    except Exception as err:
+      print(err)
+    self.write_field(user_id, field_name, end_val)
   def package_as_fobj(self, db_name="userDB.json"):
     with open(db_name, 'w') as dfile:
       json.dump(self.data, dfile)
