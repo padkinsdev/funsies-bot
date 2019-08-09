@@ -43,8 +43,20 @@ async def backup(message):
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def daily(message):
   increase_amount = str(random.randint(50, 100))
-  gatekeeper.userDB.add_to_field(message.author.id, "balance", increase_amount)
-  await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
+  last_claim = gatekeeper.userDB.get_field(message.author.id, "lastClaim")
+  if last_claim:
+    last_claim = str(last_claim)
+    if last_claim != str(datetime.date.now()):
+      gatekeeper.userDB.write_field(message.author.id, "lastClaim", datetime.date.now())
+      gatekeeper.userDB.add_to_field(message.author.id, "balance", increase_amount)
+      await message.channel.send("Your balance was increased by " + increase_amount + " credits")
+    else:
+      await message.channel.send("You already claimed today!")
+  else:
+    gatekeeper.userDB.write_field(message.author.id, "lastClaim", datetime.date.now())
+    gatekeeper.userDB.add_to_field(message.author.id, "balance", increase_amount)
+    await message.channel.send("Your balance was increased by " + increase_amount + " credits")
+
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def slots(message):
