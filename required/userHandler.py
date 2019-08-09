@@ -31,9 +31,9 @@ class UserDatabase:
     return False
   def add_to_field(self, user_id, field_name, add_amount):
     try:
-      cur_val = int(self.get_field(user_id, field_name))
+      cur_val = self.get_field(user_id, field_name)
       if cur_val:
-        end_val = cur_val + int(add_amount)
+        end_val = int(cur_val) + int(add_amount)
       else:
         end_val = int(add_amount)
     except Exception as err:
