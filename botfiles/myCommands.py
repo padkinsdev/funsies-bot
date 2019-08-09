@@ -93,7 +93,8 @@ async def affirm(message):
   
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def stats(message):
-  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nLevel:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "level"))))
+  gatekeeper.userDB.add_to_field(message.author.id, "balance", 0)
+  embed = discord.Embed(title="User Stats", color=bot_data.default_embed_color, description="{} stats:\nLevel:\t {} \nBalance:\t {}".format(message.author.mention, str(gatekeeper.userDB.get_field(message.author.id, "level")), str(gatekeeper.userDB.get_field(message.author.id, "balance")))
   embed.set_thumbnail(url=bot_data.embed_thumburl)
   await message.channel.send(embed=embed)
 
