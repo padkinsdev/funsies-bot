@@ -40,11 +40,39 @@ async def backup(message):
   else:
     await message.channel.send("Success!")
     
-#@gatekeeper.serverSpecific([servers["5htp"]])
-#async def daily(message):
-#  increase_amount = str(random.randint(50, 100))
-#  gatekeeper.userDB.add_to_bal(message.author.id, increase_amount)
-#  await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def daily(message):
+  increase_amount = str(random.randint(50, 100))
+  gatekeeper.userDB.add_to_field(message.author.id, "balance", increase_amount)
+  await message.channel.send("Your balance was increased by " + increase_amount + " funsies")
+
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def slots(message):
+  args = message.content.split(" ")
+  try:
+    bet = int(args[1])
+  except:
+    await message.channel.send(message.author.mention + " Try `" + bot_data.prefix + "slots <bet_amount>`")
+    return None
+  cur_bal = gatekeeper.userDB.get_field(message.author.id, "balance")
+  if not cur_bal or int(cur_bal) < bet:
+    await message.channel.send(message.author.mention + " You don't have enough credits to bet that! Try using `" + bot_data.prefix + "daily`")
+    return None
+  gatekeeper.userDB.add_to_field(message.author.id, "balance", -1*bet)
+  await message.channel.send(message.author.mention + " Rolling...")
+  asyncio.sleep(2)
+  result_one = random.randint(0,9)
+  result_two = random.randint(0,9)
+  result_three = random.randint(0,9)
+  await message.channel.send(message.author.mention + "Your roll:\n {} {} {}".format(result_one, result_two, result_three))
+  if result_one == result_two and result_two == result_three:
+    await message.channel.send("Three in a row! You won {} credits".format(bet*10))
+    gatekeeper.userDB.add_to_field(message.author.id, "balance", bet*10)
+  elif result_one == result_two or result_two == result_three or result_one == result_three:
+    await message.channel.send("Two of a kind. Not bad :thinking: . You won {} credits.".format(bet*3))
+    gatekeeper.userDB.add_to_field(message.author.id, "balance", bet*3)
+  else:
+    await message.channel.send(":confused: You didn't win anything...")
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def affirm(message):
@@ -64,4 +92,4 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats": stats}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats": stats, "daily": daily, "slots": slots}
