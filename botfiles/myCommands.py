@@ -102,8 +102,8 @@ async def stats(message):
 async def afk(message):
   args = message.content.split(" ")
   args.pop(0)
-  gatekeeper.userDB.write_field(message.author.id, "afk", args.join(" "))
-  await message.channel.send("I set your afk as " + args.join(" "))
+  gatekeeper.userDB.write_field(message.author.id, "afk", " ".join(args))
+  await message.channel.send("I set your afk as " + " ".join(args))
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
