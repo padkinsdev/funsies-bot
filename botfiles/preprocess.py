@@ -26,6 +26,7 @@ async def check_afk(message):
 async def preprocess_list(message):
   update_activity(message)
   await check_level_up(message)
+  await check_afk(message)
 
 ### Utilities
 def uptick(user_id, field_name):
