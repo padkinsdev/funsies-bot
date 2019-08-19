@@ -100,10 +100,20 @@ async def stats(message):
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def afk(message):
+  if " " not in message.content:
+    return False
   args = message.content.split(" ")
   args.pop(0)
   gatekeeper.userDB.write_field(message.author.id, "afk", " ".join(args))
   await message.channel.send("I set your afk as " + " ".join(args))
+
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def not_afk(message):
+  success = gatekeeper.userDB.delete_field(message.author.id, "afk")
+  if success:
+    await message.channel.send("I removed your afk, " + message.author.display_name)
+  else:
+    await message.channel.send("Something went wrong...")
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
