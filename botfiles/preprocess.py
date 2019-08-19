@@ -16,6 +16,12 @@ async def check_level_up(message):
     uptick(message.author.id, "level")
     await message.channel.send(message.author.mention + " Congrats! You are now level {}".format(int(curLevel)+1))
 
+async def check_afk(message):
+  for member in message.mentions:
+    afkstat = gatekeeper.userDB.get_field(member.id, "afk")
+    if afkstat:
+      await message.channel.send(message.author.mention + " " + member.display_name + " is afk:\n " + afkstat)
+
 ### Bullet list of things the bot needs to do before checking the command list
 async def preprocess_list(message):
   update_activity(message)
