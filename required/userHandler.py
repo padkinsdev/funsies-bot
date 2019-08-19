@@ -47,3 +47,9 @@ class UserDatabase:
   def add_new_user(self, user_id, field_dict={}):
     if str(user_id) not in self.data.keys():
       self.data.update({str(user_id): field_dict})
+  def delete_field(self, user_id, field_name):
+    if str(user_id) in self.data.keys():
+      if str(field_name) in self.data[str(user_id)].keys():
+        self.data[str(user_id)].pop(str(field_name))
+        return True
+    return None
