@@ -106,7 +106,8 @@ async def afk(message):
   args = message.content.split(" ")
   args.pop(0)
   gatekeeper.userDB.write_field(message.author.id, "afk", " ".join(args))
-  await message.author.edit(nick="[AFK] "+message.author.display_name)
+  afk_nick = "[AFK] " + message.author.display_name
+  await message.author.edit(nick=afk_nick)
   await message.channel.send("I set your afk as " + " ".join(args))
 
 @gatekeeper.serverSpecific([servers["5htp"]])
@@ -114,8 +115,8 @@ async def not_afk(message):
   success = gatekeeper.userDB.delete_field(message.author.id, "afk")
   if success:
     await message.channel.send("I removed your afk, " + message.author.display_name)
-    if message.author.display_name[0:4] == "[AFK]":
-      await message.author.edit(nick=message.author.display_name[5:])
+    if message.author.display_name[0:5] == "[AFK] ":
+      await message.author.edit(nick=message.author.display_name[6:])
   else:
     await message.channel.send("Something went wrong...")
 
