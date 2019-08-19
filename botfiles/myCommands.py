@@ -103,7 +103,7 @@ async def afk(message):
   args = message.content.split(" ")
   args.pop(0)
   gatekeeper.userDB.write_field(message.author.id, "afk", args.join(" "))
-  message.channel.send("I set your afk as " + args.join(" "))
+  await message.channel.send("I set your afk as " + args.join(" "))
 
 def mapNameToFunc(name):
   if name in commandDict.keys():
