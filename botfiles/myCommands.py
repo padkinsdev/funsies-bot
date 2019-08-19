@@ -106,8 +106,8 @@ async def afk(message):
   args = message.content.split(" ")
   args.pop(0)
   gatekeeper.userDB.write_field(message.author.id, "afk", " ".join(args))
-  afk_nick = "[AFK] "# + message.author.display_name
-  await message.author.edit(nick=afk_nick)
+  afk_nick = "[AFK] " + message.author.display_name
+  await message.author.edit(nick=afk_nick, mute=False, deafen=False)
   await message.channel.send("I set your afk as " + " ".join(args))
 
 @gatekeeper.serverSpecific([servers["5htp"]])
