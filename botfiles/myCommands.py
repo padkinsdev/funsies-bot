@@ -115,7 +115,7 @@ async def not_afk(message):
   if success:
     await message.channel.send("I removed your afk, " + message.author.display_name)
     if message.author.display_name[0:4] == "[AFK]":
-      await message.author.edit(nick=message.author.display_name[5:]
+      await message.author.edit(nick=message.author.display_name[5:])
   else:
     await message.channel.send("Something went wrong...")
 
