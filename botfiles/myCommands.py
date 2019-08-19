@@ -101,12 +101,12 @@ async def stats(message):
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def afk(message):
   if " " not in message.content:
-    await message.channel.send("Try `" + bot_data.prefix + "afk <message>")
+    await message.channel.send("Try `" + bot_data.prefix + "afk <message>`")
     return False
   args = message.content.split(" ")
   args.pop(0)
   gatekeeper.userDB.write_field(message.author.id, "afk", " ".join(args))
-  afk_nick = "[AFK] " + message.author.display_name
+  afk_nick = "[AFK] "# + message.author.display_name
   await message.author.edit(nick=afk_nick)
   await message.channel.send("I set your afk as " + " ".join(args))
 
