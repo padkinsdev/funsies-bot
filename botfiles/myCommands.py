@@ -98,6 +98,13 @@ async def stats(message):
   embed.set_thumbnail(url=bot_data.embed_thumburl)
   await message.channel.send(embed=embed)
 
+@gatekeeper.serverSpecific([servers["5htp"]])
+async def afk(message):
+  args = message.content.split(" ")
+  args.pop(0)
+  gatekeeper.userDB.write_field(message.author.id, "afk", args.join(" "))
+  message.channel.send("I set your afk as " + args.join(" "))
+
 def mapNameToFunc(name):
   if name in commandDict.keys():
     return commandDict[name]
@@ -105,4 +112,4 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats": stats, "daily": daily, "slots": slots}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats": stats, "daily": daily, "slots": slots, "afk": afk}
