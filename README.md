@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/padkinsdev/funsies-bot/badge)](https://www.codefactor.io/repository/github/padkinsdev/funsies-bot)
+
 # funsies-bot
 A Discord bot made using discord.py
 
