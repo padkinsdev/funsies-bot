@@ -1,4 +1,6 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/padkinsdev/funsies-bot/badge)](https://www.codefactor.io/repository/github/padkinsdev/funsies-bot)
+[![Coverage Status](https://coveralls.io/repos/github/padkinsdev/funsies-bot/badge.svg?branch=master)](https://coveralls.io/github/padkinsdev/funsies-bot?branch=master)
+[![Build Status](https://travis-ci.org/padkinsdev/funsies-bot.svg?branch=master)](https://travis-ci.org/padkinsdev/funsies-bot)
 
 # funsies-bot
 A Discord bot made using discord.py
