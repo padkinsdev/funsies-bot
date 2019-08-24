@@ -33,14 +33,6 @@ async def xkcd(message):
   await message.channel.send("https://xkcd.com/{}/".format(str(random.randint(1, 2181))))
     
 @gatekeeper.serverSpecific([servers["5htp"]])
-async def backup(message):
-  success, err = gatekeeper.upload_db()
-  if not success:
-    await message.channel.send(err)
-  else:
-    await message.channel.send("Success!")
-    
-@gatekeeper.serverSpecific([servers["5htp"]])
 async def daily(message):
   increase_amount = str(random.randint(50, 100))
   last_claim = gatekeeper.userDB.get_field(message.author.id, "lastClaim")
@@ -56,7 +48,6 @@ async def daily(message):
     gatekeeper.userDB.write_field(message.author.id, "lastClaim", datetime.date.today())
     gatekeeper.userDB.add_to_field(message.author.id, "balance", increase_amount)
     await message.channel.send("Your balance was increased by " + increase_amount + " credits")
-
 
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def slots(message):
@@ -86,11 +77,6 @@ async def slots(message):
   else:
     await message.channel.send(":confused: You didn't win anything...")
 
-@gatekeeper.serverSpecific([servers["5htp"]])
-async def affirm(message):
-  await message.delete()
-  await message.channel.send("That's valid, and I hope you feel better soon")
-  
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def stats(message):
   gatekeeper.userDB.add_to_field(message.author.id, "balance", 0)
