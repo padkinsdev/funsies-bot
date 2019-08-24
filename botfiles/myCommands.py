@@ -116,4 +116,4 @@ def mapNameToFunc(name):
     #print("CMD DNE")
     return None
 
-commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "backup": backup, "affirm": affirm, "stats": stats, "daily": daily, "slots": slots, "afk": afk, "not_afk": not_afk}
+commandDict = {"hello": hello, "help": commands, "rnum": rnum, "r_num": rnum, "xkcd": xkcd, "stats": stats, "daily": daily, "slots": slots, "afk": afk, "not_afk": not_afk}
