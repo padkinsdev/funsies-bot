@@ -14,6 +14,3 @@ All bot commands are found in `botfiles/myCommands.py`. `required` contains the 
 
 ### Disclaimer
 Funsies is still in active development, meaning that it is far from complete. Currently the bot is being developed by only one person, so it lacks proper formatting, comments, documentation, and optimization.
-
-### Collaboration
-I am tentatively seeking collaborators for this bot. If you are interested in working with me, submit a pull request and indicate that this is the case. Any and all help is appreciated, including one-off contributions to the source code.
