@@ -1,55 +1,49 @@
-import json
+import required.modify_db as modb
 
 class UserDatabase:
   def __init__(self):
-    self.data = {}
-  def parse_to_dict(self, fobj):
-    """
-    Extracts the data from a *raw* JSON file object into a Python dictionary
-    """
-    self.data = json.load(fobj)
-    fobj.close()
-    #print(self.data)
+    self.fname = "userDB.db"
+    self.fields = ["user_id INTEGER PRIMARY KEY", "afk TEXT", "level INTEGER", "balance INTEGER"]
+  def create_anew(self):
+    modb.initialize("/tmp/" + self.fname)
   def get_field(self, user_id, field_name):
-    if str(user_id) in self.data.keys():
-      if str(field_name) in self.data[str(user_id)].keys():
-        return self.data[str(user_id)][str(field_name)]
-      else:
-        return None
-    else:
+    value = modb.get_field(self.fname, user_id, field_name)
+    if value is None:
+      if not modb.check_table_exists(self.fpath, str(user_id)[:13]+"_data"):
+        modb.create_table(self.fpath, str(user_id)[:13]+"_data", " ".join(self.fields))
       self.add_new_user(user_id)
       return None
-  def write_field(self, user_id, field_name, value):
-    if str(user_id) in self.data.keys():
-      if str(field_name) in self.data[str(user_id)].keys():
-        self.data[str(user_id)][str(field_name)] = str(value)
-        return True
-      else:
-        self.data[str(user_id)].update({str(field_name): str(value)})
     else:
-      self.data.update({str(user_id): {str(field_name): str(value)}})
-    return False
+      return value
+  def write_field(self, user_id, field_name, value):
+    success = modb.write_field(self.fpath, user_id, field_name, value)
+    if not success:
+      if not modb.check_table_exists(self.fpath, str(user_id)[:13]+"_data"):
+        modb.create_table(self.fpath, str(user_id)[:13]+"_data", " ".join(self.fields))
+      self.add_new_user(user_id)
+      modb.write_field(self.fpath, user_id, field_name, value)
+      return False
+    else:
+      return True
   def add_to_field(self, user_id, field_name, add_amount):
     try:
-      cur_val = self.get_field(user_id, field_name)
-      if cur_val:
-        end_val = int(cur_val) + int(add_amount)
+      value = self.get_field(user_id, field_name)
+      if value:
+        endval = int(value) + int(add_amount)
       else:
-        end_val = int(add_amount)
+        endval = add_amount
+      self.write_field(user_id, field_name, endval)
     except Exception as err:
       print(err)
-    self.write_field(user_id, field_name, end_val)
-  def package_as_fobj(self, db_name="userDB.json"):
-    with open(db_name, 'w') as dfile:
-      json.dump(self.data, dfile)
-    datafile = open(db_name, 'rb')
-    return datafile
-  def add_new_user(self, user_id, field_dict={}):
-    if str(user_id) not in self.data.keys():
-      self.data.update({str(user_id): field_dict})
+  def add_new_user(self, user_id, values=None):
+    if len(values.split(",")) != len(self.fields):
+      values = None
+    if values is None:
+      values = "("
+      for i in range(0, len(self.fields)):
+        values = values + "0"
+        if i < len(self.fields)-1:
+          values = values + ", "
+    modb.add_new_user(self.fpath, user_id, values)
   def delete_field(self, user_id, field_name):
-    if str(user_id) in self.data.keys():
-      if str(field_name) in self.data[str(user_id)].keys():
-        self.data[str(user_id)].pop(str(field_name))
-        return True
-    return None
+    modb.write_field(self.fpath, user_id, field_name, "0")
