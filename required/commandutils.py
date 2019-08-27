@@ -34,14 +34,14 @@ class Commandler:
           return None
       return decorated
     return decorator
-  def get_db(self, db_name="userDB.json"):
+  def get_db(self, db_name="userDB.db"):
     success, db_fobj = self.bucket_handler.get_as_file(db_name)
     if success:
-      self.userDB.parse_to_dict(db_fobj)
       print("Database successfully fetched")
     else:
+      self.userDB.create_anew()
       print("Could not fetch database")
-  def upload_db(self, db_name="userDB.json"):
+  def upload_db(self, db_name="userDB.db"):
     db_fobj = self.userDB.package_as_fobj(db_name=db_name)
     success, err = self.bucket_handler.upload_file(db_fobj, db_name)
     return success, err
