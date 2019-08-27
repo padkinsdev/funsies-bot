@@ -19,7 +19,7 @@ async def check_level_up(message):
 async def check_afk(message):
   for member in message.mentions:
     afkstat = gatekeeper.userDB.get_field(member.id, "afk")
-    if afkstat:
+    if str(afkstat) != "0":
       await message.channel.send(message.author.mention + " " + member.display_name + " is afk:\n " + afkstat)
 
 async def remove_afk(message):
