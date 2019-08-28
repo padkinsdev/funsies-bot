@@ -96,3 +96,17 @@ def add_new_user(fpath, user_id, values):
     conn.commit()
     conn.close()
     return True
+
+def add_new_server(fpath, server_id):
+  conn = sl.connect(fpath)
+  crsr = conn.cursor()
+  crsr.execute("INSERT INTO servers VALUES server_id = {}".format(server_id))
+  conn.commit()
+  conn.close()
+
+def change_server_settings(fpath, server_id, field_name, value):
+  conn = sl.connect(fpath)
+  crsr = conn.cursor()
+  crsr.execute("UPDATE servers SET " + str(field_name) + " = " + str(value) + " WHERE server_id = " + str(server_id))
+  conn.commit()
+  conn.close()
