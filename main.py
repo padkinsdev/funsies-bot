@@ -11,7 +11,7 @@ prefix = bd.prefix
 
 @client.event
 async def on_message(message):
-  if message.author == client.user:
+  if message.author == client.user or message.author.bot:
     pass
   else:
     await pp.preprocess_list(message)
