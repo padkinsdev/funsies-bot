@@ -1,5 +1,6 @@
-import os, signal
-import sys
+import os
+#import sys
+from required.modify_db import add_new_server
 import discord
 import asyncio
 import botfiles.bot_data as bd
@@ -27,6 +28,10 @@ async def on_message(message):
       except:
         await message.channel.send(message.author.mention + " This command doesn't exist, or you don't have access to it")
 
+@client.event
+async def on_guild_join(guild):
+  add_new_server("userDB.db", guild.id)
+        
 @client.event
 async def on_ready():
   bd.gatekeeper.get_db()
