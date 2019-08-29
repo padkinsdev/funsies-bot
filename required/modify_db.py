@@ -38,9 +38,10 @@ def get_field(fpath, user_id, field_name):
   crsr = conn.cursor()
   if check_user_exists(fpath, user_id):
     crsr.execute("SELECT " + str(field_name) + " FROM " + str(user_id)[:13] + "_data WHERE user_id = '" + str(user_id) + "';")
-    return crsr.fetchone()[0]
+    final_val = crsr.fetchone()[0]
     conn.commit()
     conn.close()
+    return final_val
   else:
     conn.close()
     return None
