@@ -12,7 +12,7 @@ class Commandler:
   def requiresPermission(self, permList):
     def decorator(func):
       def decorated(message):
-        userPerms = self.userDB.get_field("permissions")
+        userPerms = self.userDB.get_field("/tmp/userDB.db", message.author.id, "permissions")
         if userPerms:
           truePerms = self.perms.getPermInteger(permList)
           if (userPerms & truePerms) == truePerms:
@@ -42,6 +42,5 @@ class Commandler:
       self.userDB.create_anew()
       print("Could not fetch database")
   def upload_db(self, db_name="userDB.db"):
-    db_fobj = self.userDB.package_as_fobj(db_name=db_name)
-    success, err = self.bucket_handler.upload_file(db_fobj, db_name)
+    success, err = self.bucket_handler.upload_file("/tmp/"+db_name, db_name)
     return success, err
