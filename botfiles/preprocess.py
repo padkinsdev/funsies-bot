@@ -1,6 +1,6 @@
 import botfiles.bot_data as bd
 import math
-import discord
+#import discord
 
 gatekeeper = bd.gatekeeper
 
