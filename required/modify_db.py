@@ -101,7 +101,7 @@ def add_new_user(fpath, user_id, values):
 def add_new_server(fpath, server_id):
   conn = sl.connect(fpath)
   crsr = conn.cursor()
-  crsr.execute("INSERT INTO servers VALUES server_id = {}".format(server_id))
+  crsr.execute("INSERT INTO servers (server_id) VALUES (" + str(server_id) + ");")
   conn.commit()
   conn.close()
 
