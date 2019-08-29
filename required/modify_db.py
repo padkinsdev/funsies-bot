@@ -78,7 +78,7 @@ def write_field(fpath, user_id, field_name, value):
     crsr.execute("UPDATE " + str(user_id)[:13] + "_data SET " + str(field_name) + " = " + str(value) + " WHERE user_id = " + str(user_id))
     conn.commit()
     conn.close()
-    return True 
+    return True
   else:
     conn.close()
     return False
