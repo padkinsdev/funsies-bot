@@ -1,6 +1,6 @@
 import asyncio
 import discord
-import os, datetime
+import datetime
 import botfiles.bot_data as bot_data
 import random
 
@@ -31,7 +31,7 @@ async def rnum(message):
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def xkcd(message):
   await message.channel.send("https://xkcd.com/{}/".format(str(random.randint(1, 2181))))
-    
+
 @gatekeeper.serverSpecific([servers["5htp"]])
 async def daily(message):
   increase_amount = str(random.randint(50, 100))
