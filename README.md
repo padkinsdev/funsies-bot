@@ -6,11 +6,11 @@
 # funsies-bot
 A Discord bot made using discord.py
 
-### General Information
-Bot hosted on Heroku with data stored in Amazon S3. Current version fetches a JSON file on load, and loads the entire file into memory, making this bot __*not*__ ideal for use on servers that have large member counts. JSON file is a substitute for an SQL database, but editing `required/userHandler.py` to work with SQL should not be overly difficult.
+## General Information
+Bot hosted on Heroku with data stored in Amazon S3. Current version is being modified to work with SQL.
 
-### Where are the commands?
+## Where are the commands?
 All bot commands are found in `botfiles/myCommands.py`. `required` contains the utilities needed to make the bot run smoothly.
 
-### Disclaimer
+## Disclaimer
 Funsies is still in active development, meaning that it is far from complete. Currently the bot is being developed by only one person, so it lacks proper formatting, comments, documentation, and optimization.
