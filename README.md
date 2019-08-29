@@ -9,7 +9,7 @@ A Discord bot made using discord.py
 ## General Information
 Bot hosted on Heroku with data stored in Amazon S3. Current version is being modified to work with SQL.
 
-## Where are the commands?
+## Location of commands
 All bot commands are found in `botfiles/myCommands.py`. `required` contains the utilities needed to make the bot run smoothly.
 
 ## Disclaimer
