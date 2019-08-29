@@ -1,7 +1,7 @@
 import os
 #import sys
 from required.modify_db import add_new_server
-import discord
+#import discord
 import asyncio
 import botfiles.bot_data as bd
 import botfiles.myCommands as mc
