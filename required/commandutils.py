@@ -35,7 +35,7 @@ class Commandler:
       return decorated
     return decorator
   def get_db(self, db_name="userDB.db"):
-    success, db_fobj = self.bucket_handler.get_as_file(db_name)
+    success, err = self.bucket_handler.get_as_file(db_name)
     if success:
       print("Database successfully fetched")
     else:
