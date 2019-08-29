@@ -8,13 +8,12 @@ class AWSBucketManager:
   def get_as_file(self, fname):
     try:
       self.bucket.download_file(fname, "/tmp/"+fname)
-      item = open("/tmp/"+fname, 'r')
-      return True, item
+      return True, ""
     except Exception as err:
       return False, err
   def upload_file(self, fobj, fname):
     try:
-      self.bucket.upload_fileobj(fobj, fname)
+      self.bucket.upload_file(fobj, fname)
       return True, ""
     except Exception as err:
       return False, err
