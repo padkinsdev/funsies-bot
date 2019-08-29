@@ -31,7 +31,7 @@ async def on_message(message):
 @client.event
 async def on_guild_join(guild):
   add_new_server("userDB.db", guild.id)
-        
+
 @client.event
 async def on_ready():
   bd.gatekeeper.get_db()
