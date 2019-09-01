@@ -9,7 +9,7 @@ def initialize(fpath):
     pass
   conn = sl.connect(fpath)
   crsr = conn.cursor()
-  crsr.execute('CREATE TABLE id_ranges (beginning_digits INTEGER PRIMARY KEY, table_name VARCHAR(25);')
+  crsr.execute('CREATE TABLE id_ranges (beginning_digits INTEGER PRIMARY KEY, table_name VARCHAR(25));')
   conn.commit()
   conn.close()
   # On the previous line, a table was created in the database which maps snowflake id number ranges to names of tables that contain the data on users with ids in those ranges
