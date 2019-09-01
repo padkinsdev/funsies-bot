@@ -1,6 +1,6 @@
 import os
 #import sys
-from required.modify_db import add_new_server
+from required.modify_db import add_new_server, initialize
 #import discord
 import asyncio
 import botfiles.bot_data as bd
@@ -30,11 +30,12 @@ async def on_message(message):
 
 @client.event
 async def on_guild_join(guild):
-  add_new_server("userDB.db", guild.id)
+  add_new_server("/tmp/userDB.db", guild.id)
 
 @client.event
 async def on_ready():
   bd.gatekeeper.get_db()
+  initialize("/tmp/userDB.db")
   print("Ready. Signed in as " + client.user.name)
 
 async def store_db():
