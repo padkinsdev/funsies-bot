@@ -5,12 +5,12 @@ def initialize(fpath):
   """
   THIS WILL CRUDELY WIPE OUT ANY DATA IN THE FILE AT fpath, SO USE IT CAREFULLY
   """
-  with open(fpath, 'w') as init:
+  with open(fpath, 'w') as initial:
     pass
   conn = sl.connect(fpath)
   crsr = conn.cursor()
   crsr.execute('CREATE TABLE id_ranges (beginning_digits INTEGER PRIMARY KEY, table_name VARCHAR(25));')
-  crsr.execute('INSERT INTO id_ranges VALUES (0, 0);')
+  #crsr.execute('INSERT INTO id_ranges VALUES (0, 0);')
   conn.commit()
   conn.close()
   # On the previous line, a table was created in the database which maps snowflake id number ranges to names of tables that contain the data on users with ids in those ranges
