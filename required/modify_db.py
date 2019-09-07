@@ -9,7 +9,7 @@ def initialize(fpath):
   #  pass
   conn = sl.connect(fpath)
   crsr = conn.cursor()
-  crsr.execute('CREATE DATABASE funsies_data')
+  crsr.execute('CREATE DATABASE funsies_data;')
   crsr.execute('CREATE TABLE id_ranges (beginning_digits INTEGER PRIMARY KEY, table_name VARCHAR(25));')
   #print("Table created")
   #crsr.execute('INSERT INTO id_ranges VALUES (0, 0);')
