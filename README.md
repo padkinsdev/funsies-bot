@@ -6,11 +6,8 @@
 # funsies-bot
 A Discord bot made using discord.py
 
-## General Information
-Current version is in private development, and the git version will be updated at some point in the future.
-
 ## Location of commands
 All bot commands are found in `botfiles/myCommands.py`. `required` contains the utilities needed to make the bot run smoothly.
 
 ## Disclaimer
-Funsies is still in active development, meaning that it is far from complete. Currently the bot is being developed by only one person, so it lacks proper formatting, comments, documentation, and optimization.
+Don't use this. Seriously. It was my first stab at creating a Discord bot, and while the final version (which this is very much not) technically works as intended, it would be best suited to being the target of a tutorial on spaghetti code and poor data storage/handling technique.
